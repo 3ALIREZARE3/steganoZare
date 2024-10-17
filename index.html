@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- [Previous head and navigation code remains the same] -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteganoZare</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div class="flex items-center py-4">
+                        <span class="font-semibold text-gray-500 text-lg">SteganoZare</span>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-1">
+                        <a href="#"
+                            class="py-4 px-2 text-gray-500 font-semibold hover:text-indigo-500 transition duration-300 nav-link"
+                            id="homeLink">Home</a>
+                        <a href="#"
+                            class="py-4 px-2 text-gray-500 font-semibold hover:text-indigo-500 transition duration-300 nav-link"
+                            id="aboutLink">About</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container max-w-4xl mx-auto p-8" id="mainContent">
+        <!-- Home Page -->
+        <div id="homePage">
+            <div class="text-center mb-10">
+                <h1 class="text-4xl font-bold text-indigo-900 mb-2">Image Steganography</h1>
+                <p class="text-gray-600">Hide your secret messages in images</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-xl p-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Encode Section -->
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-semibold text-indigo-800">Hide Message</h2>
+                        <div class="space-y-2">
+                            <label class="block text-gray-700">Upload Image</label>
+                            <input type="file" id="imageInput" accept="image/*" class="w-full p-2 border rounded">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-gray-700">Secret Message</label>
+                            <textarea id="messageInput" class="w-full p-2 border rounded" rows="4"></textarea>
+                        </div>
+                        <button onclick="hideMessage()"
+                            class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition">
+                            Hide Message
+                        </button>
+                    </div>
+
+                    <!-- Decode Section -->
+                    <div class="space-y-4">
+                        <h2 class="text-2xl font-semibold text-indigo-800">Retrieve Message</h2>
+                        <div class="space-y-2">
+                            <label class="block text-gray-700">Upload Image with Hidden Message</label>
+                            <input type="file" id="decodeImageInput" accept="image/*" class="w-full p-2 border rounded">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-gray-700">Retrieved Message</label>
+                            <textarea id="decodedMessage" class="w-full p-2 border rounded bg-gray-50" rows="4"
+                                readonly></textarea>
+                        </div>
+                        <button onclick="retrieveMessage()"
+                            class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition">
+                            Retrieve Message
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="aboutPage" class="hidden">
+            <div class="bg-white rounded-lg shadow-xl p-8">
+                <h2 class="text-3xl font-bold text-indigo-900 mb-6">About steganoZare</h2>
+                <div class="space-y-4 text-gray-600">
+                    <p>steganoZare is a free, open-source web application that allows you to hide secret messages within
+                        images using steganography techniques. This tool works entirely in your browser, ensuring your
+                        privacy and security.</p>
+
+                    <h3 class="text-xl font-semibold text-indigo-800 mt-6">How it Works</h3>
+                    <p>The application uses a technique called LSB (Least Significant Bit) steganography to hide your
+                        messages within the image data. This process is completely reversible and doesn't visibly alter
+                        the image.</p>
+
+                    <h3 class="text-xl font-semibold text-indigo-800 mt-6">Features</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>No server storage - everything happens in your browser</li>
+                        <li>Support for various image formats</li>
+                        <li>Simple and intuitive interface</li>
+                        <li>Completely free and open source</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-indigo-800 mt-6">Privacy & Security</h3>
+                    <p>Your data never leaves your browser. All processing is done locally, ensuring your messages and
+                        images remain private.</p>
+
+                    <h3 class="text-xl font-semibold text-indigo-800 mt-6">Developer</h3>
+                    <p>I'm Alireza Zare, and I'm thrilled that you're exploring this web application for creative uses
+                        such as fun, pranks, or more secretive purposes. Steganography is a fascinating blend of art and
+                        technology, and I hope this tool sparks your curiosity. Feel free to connect with me through the
+                        following links:</p>
+                    <ul class="list-disc ml-6 mt-2">
+                        <li><a href="https://github.com/3ALIREZARE3" class="text-indigo-600 hover:underline">GitHub</a>
+                        </li>
+                        <li><a href="https://www.linkedin.com/in/alireza-zare-/"
+                                class="text-indigo-600 hover:underline">LinkedIn</a></li>
+                        <li><a href="mailto:3alirezare3@gmail.com" class="text-indigo-600 hover:underline">Email:
+                                3alirezare3@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation handling
+        function updateNavigation(activePage) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('text-indigo-500', 'border-b-4', 'border-indigo-500');
+                link.classList.add('text-gray-500');
+            });
+
+            document.getElementById(activePage + 'Link').classList.remove('text-gray-500');
+            document.getElementById(activePage + 'Link').classList.add('text-indigo-500', 'border-b-4', 'border-indigo-500');
+        }
+
+        document.getElementById('homeLink').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('homePage').classList.remove('hidden');
+            document.getElementById('aboutPage').classList.add('hidden');
+            updateNavigation('home');
+        });
+
+        document.getElementById('aboutLink').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('aboutPage').classList.remove('hidden');
+            updateNavigation('about');
+        });
+
+        // Initialize home page as active
+        updateNavigation('home');
+
+        // Function to load image and return a promise
+        function loadImage(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.onerror = reject;
+                    img.src = e.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Hide message in image
+        async function hideMessage() {
+            const imageInput = document.getElementById('imageInput');
+            const messageInput = document.getElementById('messageInput');
+
+            if (!imageInput.files[0] || !messageInput.value) {
+                alert('Please select an image and enter a message');
+                return;
+            }
+
+            try {
+                const img = await loadImage(imageInput.files[0]);
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const pixels = imageData.data;
+
+                // Convert message to binary
+                const message = messageInput.value;
+                const messageBinary = message.split('').map(char =>
+                    char.charCodeAt(0).toString(2).padStart(8, '0')
+                ).join('');
+
+                // Add message length at the beginning (32 bits)
+                const lengthBinary = message.length.toString(2).padStart(32, '0');
+                const fullMessageBinary = lengthBinary + messageBinary;
+
+                if (fullMessageBinary.length > pixels.length / 4) {
+                    alert('Message is too long for this image');
+                    return;
+                }
+
+                // Hide message in the least significant bits
+                for (let i = 0; i < fullMessageBinary.length; i++) {
+                    const bit = fullMessageBinary[i];
+                    pixels[i * 4] = (pixels[i * 4] & 254) | parseInt(bit);
+                }
+
+                ctx.putImageData(imageData, 0, 0);
+
+                // Download the image
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'secret_message.png';
+                link.click();
+            } catch (error) {
+                alert('Error processing image: ' + error.message);
+            }
+        }
+
+        // Retrieve hidden message from image
+        async function retrieveMessage() {
+            const decodeImageInput = document.getElementById('decodeImageInput');
+
+            if (!decodeImageInput.files[0]) {
+                alert('Please select an image to decode');
+                return;
+            }
+
+            try {
+                const img = await loadImage(decodeImageInput.files[0]);
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const pixels = imageData.data;
+
+                // Extract length (first 32 bits)
+                let lengthBinary = '';
+                for (let i = 0; i < 32; i++) {
+                    lengthBinary += pixels[i * 4] & 1;
+                }
+                const messageLength = parseInt(lengthBinary, 2);
+
+                if (isNaN(messageLength) || messageLength <= 0 || messageLength > (pixels.length / 32)) {
+                    throw new Error('No valid message found in this image');
+                }
+
+                // Extract message
+                let messageBinary = '';
+                for (let i = 32; i < 32 + (messageLength * 8); i++) {
+                    messageBinary += pixels[i * 4] & 1;
+                }
+
+                // Convert binary message to text
+                let message = '';
+                for (let i = 0; i < messageBinary.length; i += 8) {
+                    const byte = messageBinary.substr(i, 8);
+                    message += String.fromCharCode(parseInt(byte, 2));
+                }
+
+                document.getElementById('decodedMessage').value = message;
+            } catch (error) {
+                alert('Error reading message: ' + error.message);
+                document.getElementById('decodedMessage').value = '';
+            }
+        }
+    </script>
+</body>
+
+</html>
